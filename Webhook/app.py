@@ -10,14 +10,14 @@ def trigger_call():
     client = Client(account_sid, auth_token)
 
     # List of numbers to call
-    numbers_to_call = ['+923068007078']
+    numbers_to_call = ['your-phone-number-with-country-code']
     call_sids = []  # To store Call SIDs
 
     for number in numbers_to_call:
         call = client.calls.create(
                             twim='<Response><Say>"change Alert message here"</Say></Response>',
                             to=number,
-                            from_='+14158422910'
+                            from_='+twilio-number'
                         )
         call_sids.append(call.sid)
 
