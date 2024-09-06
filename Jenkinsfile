@@ -10,7 +10,7 @@ pipeline{
     stages {
         stage ("Git Pull"){
             steps{
-                git branch: 'main', url: 'https://github.com/Aj7Ay/Uptime-kuma.git'
+                git branch: 'main', url: 'https://github.com/AbdurRazzaq2004/Uptime-kuma.git'
             }
         }
         stage('Install Dependencies') {
@@ -21,8 +21,7 @@ pipeline{
         stage("Sonarqube Analysis "){
             steps{
                 withSonarQubeEnv('sonar-server') {
-                    sh ''' $SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=Chatbot \
-                    -Dsonar.projectKey=Chatbot '''
+                    sh "$SCANNER_HOME/bin/sonar-scanner -Dsonar.projectName=uptime -Dsonar.projectKey=uptime"
                 }
             }
         }
@@ -49,8 +48,8 @@ pipeline{
                 script{
                    withDockerRegistry(credentialsId: 'docker', toolName: 'docker'){   
                        sh "docker build -t uptime ."
-                       sh "docker tag uptime sevenajay/uptime:latest "
-                       sh "docker push sevenajay/uptime:latest "
+                       sh "docker tag uptime abdurrazzaq2004/uptime:latest "
+                       sh "docker push abdurrazzaq2004/uptime:latest "
                     }
                 }
             }
@@ -68,7 +67,7 @@ pipeline{
         }
         stage('Deploy to container'){
             steps{
-                sh 'docker run -d --name uptime -v /var/run/docker.sock:/var/run/docker.sock -p 3001:3001 sevenajay/uptime:latest'
+                sh 'docker run -d --name uptime -v /var/run/docker.sock:/var/run/docker.sock -p 3001:3001 abdurrazzaq2004/uptime:latest'
             }
         }
     }
