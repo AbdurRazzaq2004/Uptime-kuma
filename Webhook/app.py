@@ -5,19 +5,19 @@ app = Flask(__name__)
 
 @app.route('/trigger-call', methods=['GET', 'POST'])
 def trigger_call():
-    account_sid = '<acc-sid>'
-    auth_token = '<acc-auth>'
+    account_sid = 'AC15a9f06a13afe35088450572f231068a'
+    auth_token = 'bdf0c15709b6727d30c0724679a7d063'
     client = Client(account_sid, auth_token)
 
     # List of numbers to call
-    numbers_to_call = ['<number>', '<number>']
+    numbers_to_call = ['+923068007078']
     call_sids = []  # To store Call SIDs
 
     for number in numbers_to_call:
         call = client.calls.create(
                             twim='<Response><Say>"change Alert message here"</Say></Response>',
                             to=number,
-                            from_='<twilio-number>'
+                            from_='+14158422910'
                         )
         call_sids.append(call.sid)
 
